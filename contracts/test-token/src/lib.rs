@@ -7,7 +7,9 @@ use near_sdk::{
     json_types::U128,
     env, near_bindgen, require, AccountId, PanicOnDefault, PromiseOrValue
 };
+use crate::events::Event;
 
+mod events;
 
 #[near_bindgen]
 #[derive(BorshSerialize, BorshDeserialize, PanicOnDefault)]
@@ -33,13 +35,33 @@ impl Contract {
     }
 
     pub fn mint(&mut self, account_id: AccountId, amount: U128) {
+        if self.token.storage_balance_of(account_id.clone()).is_none() {
+            self.token.internal_register_account(&account_id);
+        }
+
         self.token
             .internal_deposit(&account_id, amount.into());
+        
+        Event::TokenMint { 
+            caller_id: &env::predecessor_account_id(), 
+            receiver_id: &account_id, 
+            mint_amount: &amount, 
+            cur_supply: &self.token.ft_total_supply() 
+        }
+        .emit();
     }
 
     pub fn burn(&mut self, account_id: AccountId, amount: U128) {
         self.token
             .internal_withdraw(&account_id, amount.into());
+        
+        Event::TokenBurn { 
+            caller_id: &env::predecessor_account_id(), 
+            target_id: &account_id, 
+            burn_amount: &amount, 
+            cur_supply: &self.token.ft_total_supply() 
+        }
+        .emit();
     }
 
     pub fn set_token_name(&mut self, name: String, symbol: String) {
@@ -92,7 +114,7 @@ mod tests {
         testing_env!(context
             .attached_deposit(125 * env::storage_byte_cost())
             .build());
-        contract.storage_deposit(Some(accounts(0)), None);
+        // contract.storage_deposit(Some(accounts(0)), None);
         contract.mint(accounts(0), 1_000_000.into());
         assert_eq!(contract.ft_balance_of(accounts(0)), 1_000_000.into());
 

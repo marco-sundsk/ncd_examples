@@ -5,15 +5,34 @@ use near_contract_standards::fungible_token::{
 use near_sdk::{
     borsh::{self, BorshDeserialize, BorshSerialize,},
     json_types::U128,
-    env, near_bindgen, require, AccountId, PanicOnDefault, PromiseOrValue
+    collections::UnorderedSet,
+    env, near_bindgen, require, AccountId, PanicOnDefault, PromiseOrValue, BorshStorageKey
 };
 use crate::events::Event;
 
 mod events;
+mod operator;
+mod owner;
+
+pub(crate) fn assert_one_yocto() {
+    require!(
+        env::attached_deposit() == 1,
+        "Requires attached deposit of exactly 1 yoctoNEAR"
+    )
+}
+
+#[derive(BorshStorageKey, BorshSerialize)]
+pub(crate) enum StorageKeys {
+    Token,
+    Operator,
+}
 
 #[near_bindgen]
 #[derive(BorshSerialize, BorshDeserialize, PanicOnDefault)]
 pub struct Contract {
+    owner_id: AccountId,
+    operators: UnorderedSet<AccountId>,
+
     token: FungibleToken,
     name: String,
     symbol: String,
@@ -24,9 +43,11 @@ pub struct Contract {
 #[near_bindgen]
 impl Contract {
     #[init]
-    pub fn new(name: String, symbol: String, decimals: u8) -> Self {
+    pub fn new(owner_id: AccountId, name: String, symbol: String, decimals: u8) -> Self {
         Self {
-            token: FungibleToken::new(b"t".to_vec()),
+            owner_id: owner_id.clone(),
+            operators: UnorderedSet::new(StorageKeys::Operator),
+            token: FungibleToken::new(StorageKeys::Token),
             name,
             symbol,
             icon: None,
@@ -63,23 +84,15 @@ impl Contract {
         }
         .emit();
     }
+}
 
-    pub fn set_token_name(&mut self, name: String, symbol: String) {
-        require!(env::predecessor_account_id() == env::current_account_id(), "NOT ALLOWED");
-        self.name = name;
-        self.symbol = symbol;
-    }
-
-    pub fn set_icon(&mut self, icon: String) {
-        require!(env::predecessor_account_id() == env::current_account_id(), "NOT ALLOWED");
-        self.icon = Some(icon);
-    }
-
-    pub fn set_decimals(&mut self, dec: u8) {
-        require!(env::predecessor_account_id() == env::current_account_id(), "NOT ALLOWED");
-        self.decimals = dec;
+impl Contract {
+    fn is_owner_or_operators(&self) -> bool {
+        env::predecessor_account_id() == self.owner_id 
+            || self.operators.contains(&env::predecessor_account_id())
     }
 }
+
 
 near_contract_standards::impl_fungible_token_core!(Contract, token);
 near_contract_standards::impl_fungible_token_storage!(Contract, token);
@@ -106,11 +119,15 @@ mod tests {
 
     use super::*;
 
+    fn owner() -> AccountId {
+        AccountId::new_unchecked("owner".to_string())
+    }
+
     #[test]
     fn test_basics() {
         let mut context = VMContextBuilder::new();
         testing_env!(context.build());
-        let mut contract = Contract::new(String::from("TBD"), String::from("TBD"), 24);
+        let mut contract = Contract::new(owner(), String::from("TBD"), String::from("TBD"), 24);
         testing_env!(context
             .attached_deposit(125 * env::storage_byte_cost())
             .build());

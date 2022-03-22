@@ -1,5 +1,6 @@
 use near_contract_standards::fungible_token::{
     metadata::{FungibleTokenMetadata, FungibleTokenMetadataProvider, FT_METADATA_SPEC,},
+    events::{FtBurn, FtMint},
     FungibleToken
 };
 use near_sdk::{
@@ -13,6 +14,7 @@ use crate::events::Event;
 mod events;
 mod operator;
 mod owner;
+mod view;
 
 pub(crate) fn assert_one_yocto() {
     require!(
@@ -70,6 +72,13 @@ impl Contract {
             cur_supply: &self.token.ft_total_supply() 
         }
         .emit();
+
+        FtMint {
+            owner_id: &account_id,
+            amount: &amount,
+            memo: None
+        }
+        .emit();
     }
 
     pub fn burn(&mut self, account_id: AccountId, amount: U128) {
@@ -81,6 +90,13 @@ impl Contract {
             target_id: &account_id, 
             burn_amount: &amount, 
             cur_supply: &self.token.ft_total_supply() 
+        }
+        .emit();
+
+        FtBurn {
+            owner_id: &account_id,
+            amount: &amount,
+            memo: None
         }
         .emit();
     }

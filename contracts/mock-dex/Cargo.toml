@@ -1,5 +1,5 @@
 [package]
-name = "test_token"
+name = "mock_dex"
 version = "1.0.0"
 authors = ["Marco Sun <sun.dsk1@gmail.com>"]
 edition = "2018"

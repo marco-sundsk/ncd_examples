@@ -11,10 +11,10 @@ pub trait ExtNep141 {
     fn ft_balance_of(&self, account_id: AccountId) -> U128;
 }
 
-#[ext_contract(ext_self)]
-trait DemoCallback {
-    fn get_balance_callback(&mut self, account_id: AccountId);
-}
+// #[ext_contract(ext_self)]
+// trait DemoCallback {
+//     fn get_balance_callback(&mut self, account_id: AccountId);
+// }
 
 #[near_bindgen]
 impl Contract {
@@ -44,18 +44,14 @@ impl Contract {
     pub fn peek_user_balance(&mut self, account_id: AccountId) {
         assert_one_yocto();
         require!(self.is_owner_or_operators(), "NOT ALLOWED");
-        ext_nep_141::ft_balance_of(
-            account_id.clone(),
-            env::current_account_id(),
-            NO_DEPOSIT,
-            env::prepaid_gas() - Gas(20 * TGAS) - Gas(5 * TGAS),
-        )
-        .then(ext_self::get_balance_callback(
-            account_id,
-            env::current_account_id(),
-            NO_DEPOSIT,
-            Gas(5 * TGAS),
-        ));
+        ext_nep_141::ext(env::current_account_id())
+            .with_static_gas(env::prepaid_gas() - Gas(20 * TGAS) - Gas(5 * TGAS))
+            .ft_balance_of(account_id.clone())
+        .then(
+            Self::ext(env::current_account_id())
+                .with_static_gas(Gas(5 * TGAS))
+                .get_balance_callback(account_id)
+            );
     }
 
 

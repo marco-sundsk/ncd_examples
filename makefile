@@ -28,4 +28,5 @@ mock-dex: contracts/mock-dex
 	cp target/wasm32-unknown-unknown/release/mock_dex.wasm ./res/mock_dex.wasm
 
 clean:
+	cargo clean
 	rm res/*.wasm

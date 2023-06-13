@@ -7,6 +7,7 @@ pub use workspaces::{
     network::Sandbox, result::CallExecutionDetails, Account, AccountId, Contract, Worker,
 };
 
+
 pub async fn initialize_contracts_and_users(
     worker: &Worker<Sandbox>,
 ) -> anyhow::Result<(Account, Contract)> {
@@ -27,6 +28,12 @@ pub async fn initialize_contracts_and_users(
         .await?
         .unwrap();
 
+    // cchl.call(worker, "new")
+    // .args_json(json!({}))?
+    // .gas(300_000_000_000_000)
+    // .transact()
+    // .await?;
+
     Ok((root, cchl))
 }
 
@@ -37,26 +44,50 @@ async fn test_cchl() -> anyhow::Result<()> {
     println!("Contract deployed at {}.", cchl.id());
 
     let outcome = root
-        .call(&worker, cchl.id(), "demo2")
-        .args_json(())?
-        .max_gas()
+        .call(&worker, cchl.id(), "demo")
+        .args_json(json!({
+            "n": 5_u32,
+        }))?
+        .gas(300_000_000_000_000)
         .transact()
         .await?;
-    println!("called demo2.");
+    println!("called demo.");
     let ret = outcome.json::<u32>().unwrap();
     println!("We got a return value of {}.", ret);
 
-    // let outcome = root
-    //     .call(&worker, cchl.id(), "demo")
-    //     .args_json(json!({
-    //         "n": 5_u32,
-    //     }))?
-    //     .gas(300_000_000_000_000)
-    //     .transact()
-    //     .await?;
-    // println!("called demo.");
-    // let ret = outcome.json::<u32>().unwrap();
-    // println!("We got a return value of {}.", ret);
+    let outcome = root
+        .call(&worker, cchl.id(), "factorial")
+        .args_json(json!({
+            "n": 5_u32,
+        }))?
+        .gas(300_000_000_000_000)
+        .transact()
+        .await?;
+    println!("called factorial.");
+    let ret = outcome.json::<u32>().unwrap();
+    println!("We got a return value of {}.", ret);
+
+    // show details of the call
+    // println!("{:#?}", outcome);
+
+    // show all logs in the call
+    println!("logs = {:#?}", outcome.logs());
+
+    // total gas burnt
+    println!("total_gas_burnt: {:?}", outcome.total_gas_burnt);
+
+    // break down gas burnt
+    
+    println!("initial transaction gas_burnt: {:?}", outcome.outcome().gas_burnt);
+    println!("Following is the break down of all sub receipts in the call:");
+    for receipt in outcome.receipt_outcomes() {
+        println!("sub receipt gas burnt: {:?}", receipt.gas_burnt);
+    }
+
+    println!("Following is the break down of all receipts in the call:");
+    for receipt in outcome.outcomes() {
+        println!("receipt gas burnt: {:?}", receipt.gas_burnt);
+    }
 
     Ok(())
 }

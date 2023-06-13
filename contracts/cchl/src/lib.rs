@@ -4,18 +4,12 @@ use near_sdk::{log, near_bindgen, PromiseOrValue};
 
 #[near_bindgen]
 #[derive(Default, BorshDeserialize, BorshSerialize)]
-pub struct Contract {
-    counter: u32,
-}
+pub struct Contract { }
 
 #[near_bindgen]
 impl Contract {
     pub fn demo(&self, n: u32) -> u32 {
         n*(n-1)
-    }
-
-    pub fn demo2(&self) -> u32 {
-        10
     }
 
     pub fn factorial(&self, n: u32) -> PromiseOrValue<u32> {

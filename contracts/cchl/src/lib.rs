@@ -8,6 +8,15 @@ pub struct Contract { }
 
 #[near_bindgen]
 impl Contract {
+
+    #[init]
+    pub fn new() -> Self {
+        assert!(!env::state_exists(), "ALREADY_INIT");
+        Self {
+            counter: 0
+        }
+    }
+
     pub fn demo(&self, n: u32) -> u32 {
         n*(n-1)
     }

@@ -77,7 +77,6 @@ async fn test_cchl() -> anyhow::Result<()> {
     println!("total_gas_burnt: {:?}", outcome.total_gas_burnt);
 
     // break down gas burnt
-    
     println!("initial transaction gas_burnt: {:?}", outcome.outcome().gas_burnt);
     println!("Following is the break down of all sub receipts in the call:");
     for receipt in outcome.receipt_outcomes() {

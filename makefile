@@ -1,6 +1,6 @@
 RFLAGS="-C link-arg=-s"
 
-all: sim-token mock-dex
+all: sim-token mock-dex storage-demo cchl 
 
 test: cchl
 ifdef TF
@@ -14,6 +14,12 @@ cchl: contracts/cchl
 	RUSTFLAGS=$(RFLAGS) cargo build -p cross-contract-high-level --target wasm32-unknown-unknown --release
 	mkdir -p res
 	cp target/wasm32-unknown-unknown/release/cross_contract_high_level.wasm ./res/cross_contract_high_level.wasm
+
+storage-demo: contracts/storage-demo
+	rustup target add wasm32-unknown-unknown
+	RUSTFLAGS=$(RFLAGS) cargo build -p storage-demo --target wasm32-unknown-unknown --release
+	mkdir -p res
+	cp target/wasm32-unknown-unknown/release/storage_demo.wasm ./res/storage_demo.wasm
 
 sim-token: contracts/sim-token
 	rustup target add wasm32-unknown-unknown

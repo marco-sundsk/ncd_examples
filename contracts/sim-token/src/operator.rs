@@ -1,9 +1,8 @@
 use crate::*;
 use near_sdk::{
-    near_bindgen, log, ext_contract, AccountId, Gas, Balance
+    near_bindgen, log, ext_contract, AccountId, Gas
 };
 
-pub const NO_DEPOSIT: Balance = 0;
 pub const TGAS: u64 = 1_000_000_000_000;
 
 #[ext_contract(ext_nep_141)]

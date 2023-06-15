@@ -1,3 +1,15 @@
+export NEAR_ENV=testnet
+export EG=dev-1635142748034-53304986766242
+near call $EG new '{"owner_id": "u1.testnet"}' --account_id $EG
+# add notebook
+near call $EG add_text_notebook '' --account_id $EG
+near call $EG add_rich_notebook '' --account_id $EG
+# add_notes
+near call $EG add_notes '{"notebook_id": 0, "content": "this is msg one."}' --account_id u1.testnet
+near call $EG add_notes '{"notebook_id": 1, "content": "this is msg two."}' --account_id u1.testnet
+# add friends
+near call $EG add_friends '{"friends": ["u2.testnet"]}' --account_id u1.testnet
+
 {
     "values": [
       {
@@ -71,7 +83,7 @@
       {
         "key": "AmUAAAAAAAAAAA==",
         idx -> item, used for iteration
-        content: b'\x02e\x00\x00\x00\x00\x00\x00\x00\x00'
+        content: b'\x02e \x00\x00\x00\x00\x00\x00\x00\x00'
         hex    : b'\x02\x65\x00\x00\x00\x00\x00\x00\x00\x00'
         "value": "CgAAAHUyLnRlc3RuZXQ="
         content: b'\n\x00\x00\x00u2.testnet'
@@ -81,7 +93,7 @@
       {
         "key": "AmkKAAAAdTIudGVzdG5ldA==",
         item -> idx, used for telling item existence
-        content: b'\x02i\n\x00\x00\x00u2.testnet'
+        content: b'\x02i \n\x00\x00\x00u2.testnet'
         hex    : b'\x02\x69\x0a\x00\x00\x00\x75\x32\x2e\x74\x65\x73\x74\x6e\x65\x74'
         "value": "AAAAAAAAAAA="
         content: b'\x00\x00\x00\x00\x00\x00\x00\x00'

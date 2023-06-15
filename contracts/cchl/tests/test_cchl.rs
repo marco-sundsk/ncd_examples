@@ -63,23 +63,23 @@ async fn test_cchl() -> anyhow::Result<()> {
     println!("We got a return value of {}.", ret);
 
     // show details of the call
-    // println!("{:#?}", outcome);
+    println!("{:#?}", outcome);
 
     // show all logs in the call
-    println!("logs = {:#?}", outcome.logs());
+    // println!("logs = {:#?}", outcome.logs());
 
     // total gas burnt
     println!("total_gas_burnt: {:?}", outcome.total_gas_burnt);
 
     // break down gas burnt
-    println!(
-        "initial transaction gas_burnt: {:?}",
-        outcome.outcome().gas_burnt
-    );
-    println!("Following is the break down of all sub receipts in the call:");
-    for receipt in outcome.receipt_outcomes() {
-        println!("sub receipt gas burnt: {:?}", receipt.gas_burnt);
-    }
+    // println!(
+    //     "initial transaction gas_burnt: {:?}",
+    //     outcome.outcome().gas_burnt
+    // );
+    // println!("Following is the break down of all sub receipts in the call:");
+    // for receipt in outcome.receipt_outcomes() {
+    //     println!("sub receipt gas burnt: {:?}", receipt.gas_burnt);
+    // }
 
     println!("Following is the break down of all receipts in the call:");
     for receipt in outcome.outcomes() {

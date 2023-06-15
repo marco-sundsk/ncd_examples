@@ -1,0 +1,272 @@
+ExecutionFinalResult {
+    total_gas_burnt: 47618721251509,
+
+    transaction: ExecutionOutcome {
+        block_hash: `JBkR229Wx56ujJ4pLpJ4SQSoJP3tsFYKr3dn8dwEq8Yr`,
+        logs: [],
+        receipt_ids: [
+            `Aixy1NcjfJRUW7fhERS4whVHnNXQbE3zuG1C79XCyNAd`,
+        ],
+        gas_burnt: 2427956774944,
+        tokens_burnt: 242795677494400000000,
+        executor_id: AccountId(
+            "test.near",
+        ),
+        status: SuccessReceiptId(Aixy1NcjfJRUW7fhERS4whVHnNXQbE3zuG1C79XCyNAd),
+    }, // Convert Transaction To Receipt
+
+    receipts: [
+        ExecutionOutcome {
+            block_hash: `CneBhpqUzYkKGWDvggZjy3jkrxcin7zxobExEuYqkYF7`,
+            logs: [],
+            receipt_ids: [
+                `9ujGbuzGmRMsLszeVujgKdFhQB1Nh3EKWQwcWe3AthMb`,
+                `HikGdYfvXgdrwYepnipNFc43FGZNb4BXJEprAcAErQrA`,
+                `2LcrEcqynpEQu4eYq9YzaGjd5YmJyUAEa6WDjgVEN4PZ`,
+            ],
+            gas_burnt: 7539343474697,
+            tokens_burnt: 753934347469700000000,
+            executor_id: AccountId(
+                "cchl.test.near",
+            ),
+            status: SuccessReceiptId(HikGdYfvXgdrwYepnipNFc43FGZNb4BXJEprAcAErQrA),
+        }, // [layer 1] Called method: 'factorial' in contract, n=5
+
+        ExecutionOutcome {
+            block_hash: `H4nnrZkMm7og3RRSY3YT4ZdRGRDZREjdto4duovwUEUh`,
+            logs: [],
+            receipt_ids: [
+                `J8GBsriyLuhECB2TuFDpEzqvGyyWNRDf9LNBtRqfYWNo`,
+                `ErXg8ABqVoknGpBveMEiM1ovd4DzsnbchHkJTWBGibmx`,
+                `DETBaerw7fuTqejXtMkp2QDVakxLb2WyfYZw79RqHVJ7`,
+            ],
+            gas_burnt: 7539481170785,
+            tokens_burnt: 753948117078500000000,
+            executor_id: AccountId(
+                "cchl.test.near",
+            ),
+            status: SuccessReceiptId(ErXg8ABqVoknGpBveMEiM1ovd4DzsnbchHkJTWBGibmx),
+        }, // [layer 2] Called method: 'factorial' in contract, n=4
+
+        ExecutionOutcome {
+            block_hash: `F3ssj3SU1ruvbPJpqm22DPBy4mMWK4Zm75sd5SDYWExh`,
+            logs: [],
+            receipt_ids: [
+                `3QjAcCpNC2P6vmPYko3bXE8hN17dsXM8fZSQi9YiHt6K`,
+                `4w5ekcZkjQZo5DnuZ5GqWPi8LPdAoCVYXc1H2vqY3Bbj`,
+                `8MWkfaNLhRyKj5RZBLmjetNB9FxkSPPjvr8QvyZ5KaYV`,
+            ],
+            gas_burnt: 7539481170785,
+            tokens_burnt: 753948117078500000000,
+            executor_id: AccountId(
+                "cchl.test.near",
+            ),
+            status: SuccessReceiptId(4w5ekcZkjQZo5DnuZ5GqWPi8LPdAoCVYXc1H2vqY3Bbj),
+        }, // [layer 3] Called method: 'factorial' in contract, n=3
+
+        ExecutionOutcome {
+            block_hash: `NQxq5TKj9zRsVy82gFQ6XRRCopRnJ4RK5zqNQWy91zG`,
+            logs: [],
+            receipt_ids: [
+                `DLWx8cjYbw83KcGnVSoNzCsf5DkeBToHGw7KoUA8hBdL`,
+                `D128n2MEhTdEdoKNF5Rv8qoBUarytwmbVjGGFQrs67ZK`,
+                `GZVYvxRa7gJ76wLcHAH8wBVUvqhdaUFEdKANa412wbxm`,
+            ],
+            gas_burnt: 7539481170785,
+            tokens_burnt: 753948117078500000000,
+            executor_id: AccountId(
+                "cchl.test.near",
+            ),
+            status: SuccessReceiptId(D128n2MEhTdEdoKNF5Rv8qoBUarytwmbVjGGFQrs67ZK),
+        }, // [layer 4] Called method: 'factorial' in contract, n=2
+
+        ExecutionOutcome {
+            block_hash: `79T2ygaPVN4xcqD2HkcrCWrzUV8DDjRC4v5XqxNyy8cP`,
+            logs: [],
+            receipt_ids: [
+                `9G5cGzRTK1hooX7MqHZmLVmBn3tHQT3rNaLG2Bqxzrwv`,
+            ],
+            gas_burnt: 2556028715752,
+            tokens_burnt: 255602871575200000000,
+            executor_id: AccountId(
+                "cchl.test.near",
+            ),
+            status: SuccessValue(`1`),
+        }, // [layer 5] Called method: 'factorial' in contract, n=1
+
+        ExecutionOutcome {
+            block_hash: `J1pU79L6TDw9oTJD6jLttKD2BvLPQb7JuhY2uqskRwKb`,
+            logs: [],
+            receipt_ids: [],
+            gas_burnt: 223182562500,
+            tokens_burnt: 0,
+            executor_id: AccountId(
+                "test.near",
+            ),
+            status: SuccessValue(``),
+        }, // system settles gas of [layer 5] and refund unused to caller
+
+        ExecutionOutcome {
+            block_hash: `J1pU79L6TDw9oTJD6jLttKD2BvLPQb7JuhY2uqskRwKb`,
+            logs: [
+                "Received 2 and 1",
+                "Multiplied 2",
+            ],
+            receipt_ids: [
+                `HD6MD1e8ky89bquE2SGqxT9Aoxqov3wd8UFRgvsrYsfx`,
+            ],
+            gas_burnt: 2616718088658,
+            tokens_burnt: 261671808865800000000,
+            executor_id: AccountId(
+                "cchl.test.near",
+            ),
+            status: SuccessValue(`2`),
+        }, // [layer 4 then callback] Called method: 'factorial_mult' in contract, n=2
+
+        ExecutionOutcome {
+            block_hash: `7TYdNV11cnGZ5gJuSvWpu4bxGRMDfdMChp5bwbHf18gY`,
+            logs: [],
+            receipt_ids: [],
+            gas_burnt: 223182562500,
+            tokens_burnt: 0,
+            executor_id: AccountId(
+                "test.near",
+            ),
+            status: SuccessValue(``),
+        }, // system settles gas of [layer 4 then callback] and refund unused to caller
+
+        ExecutionOutcome {
+            block_hash: `79T2ygaPVN4xcqD2HkcrCWrzUV8DDjRC4v5XqxNyy8cP`,
+            logs: [],
+            receipt_ids: [],
+            gas_burnt: 223182562500,
+            tokens_burnt: 0,
+            executor_id: AccountId(
+                "test.near",
+            ),
+            status: SuccessValue(``),
+        }, // system settles gas of [layer 3] and refund unused to caller
+
+        ExecutionOutcome {
+            block_hash: `7TYdNV11cnGZ5gJuSvWpu4bxGRMDfdMChp5bwbHf18gY`,
+            logs: [
+                "Received 3 and 2",
+                "Multiplied 6",
+            ],
+            receipt_ids: [
+                `HNZxm9h2tDQ6nfZU2uso4eLP3AauNsN8mXAVQvT3cyoB`,
+            ],
+            gas_burnt: 2616718088658,
+            tokens_burnt: 261671808865800000000,
+            executor_id: AccountId(
+                "cchl.test.near",
+            ),
+            status: SuccessValue(`6`),
+        }, // [layer 3 then callback] Called method: 'factorial_mult' in contract, n=3
+
+        ExecutionOutcome {
+            block_hash: `5MdHB3UdCq6qqj7oAj767LPwnGN9mxUUPFJp5xcW1pKj`,
+            logs: [],
+            receipt_ids: [],
+            gas_burnt: 223182562500,
+            tokens_burnt: 0,
+            executor_id: AccountId(
+                "test.near",
+            ),
+            status: SuccessValue(``),
+        }, // system settles gas of [layer 3 then callback] and refund unused to caller
+        ExecutionOutcome {
+            block_hash: `NQxq5TKj9zRsVy82gFQ6XRRCopRnJ4RK5zqNQWy91zG`,
+            logs: [],
+            receipt_ids: [],
+            gas_burnt: 223182562500,
+            tokens_burnt: 0,
+            executor_id: AccountId(
+                "test.near",
+            ),
+            status: SuccessValue(``),
+        }, // system settles gas of [layer 2] and refund unused to caller
+
+        ExecutionOutcome {
+            block_hash: `5MdHB3UdCq6qqj7oAj767LPwnGN9mxUUPFJp5xcW1pKj`,
+            logs: [
+                "Received 4 and 6",
+                "Multiplied 24",
+            ],
+            receipt_ids: [
+                `BSUcBFi76CmNDVSMBTKmQZF9y6MC1neXqSgp2bDdWxAN`,
+            ],
+            gas_burnt: 2617096159344,
+            tokens_burnt: 261709615934400000000,
+            executor_id: AccountId(
+                "cchl.test.near",
+            ),
+            status: SuccessValue(`24`),
+        }, // [layer 2 then callback] Called method: 'factorial_mult' in contract, n=4
+
+        ExecutionOutcome {
+            block_hash: `H3H2WaxocF9MbCDJPKwYCXr3NkanjCv6oo8wdTVFnCD6`,
+            logs: [],
+            receipt_ids: [],
+            gas_burnt: 223182562500,
+            tokens_burnt: 0,
+            executor_id: AccountId(
+                "test.near",
+            ),
+            status: SuccessValue(``),
+        }, // system settles gas of [layer 2 then callback] and refund unused to caller
+        ExecutionOutcome {
+            block_hash: `F3ssj3SU1ruvbPJpqm22DPBy4mMWK4Zm75sd5SDYWExh`,
+            logs: [],
+            receipt_ids: [],
+            gas_burnt: 223182562500,
+            tokens_burnt: 0,
+            executor_id: AccountId(
+                "test.near",
+            ),
+            status: SuccessValue(``),
+        }, // system settles gas of [layer 1] and refund unused to caller
+
+        ExecutionOutcome {
+            block_hash: `H3H2WaxocF9MbCDJPKwYCXr3NkanjCv6oo8wdTVFnCD6`,
+            logs: [
+                "Received 5 and 24",
+                "Multiplied 120",
+            ],
+            receipt_ids: [
+                `F4BwgDdEDGbV2Cne2RWQ2ygFHEbQZC96A1dYqTtSKXum`,
+            ],
+            gas_burnt: 2617773374601,
+            tokens_burnt: 261777337460100000000,
+            executor_id: AccountId(
+                "cchl.test.near",
+            ),
+            status: SuccessValue(`120`),
+        }, // [layer 1 then callback] Called method: 'factorial_mult' in contract, n=5
+
+        ExecutionOutcome {
+            block_hash: `4uUZfsB2mhb9i44QYBHojUTAB5QQbznMufxjCtSmkJKG`,
+            logs: [],
+            receipt_ids: [],
+            gas_burnt: 223182562500,
+            tokens_burnt: 0,
+            executor_id: AccountId(
+                "test.near",
+            ),
+            status: SuccessValue(``),
+        }, // system settles gas of [layer 1 then callback] and refund unused to caller
+        ExecutionOutcome {
+            block_hash: `H4nnrZkMm7og3RRSY3YT4ZdRGRDZREjdto4duovwUEUh`,
+            logs: [],
+            receipt_ids: [],
+            gas_burnt: 223182562500,
+            tokens_burnt: 0,
+            executor_id: AccountId(
+                "test.near",
+            ),
+            status: SuccessValue(``),
+        }, // system settles gas of remaining and refund unused to caller
+    ],
+
+    status: SuccessValue(`120`), // the final return value
+}

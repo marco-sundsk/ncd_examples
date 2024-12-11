@@ -132,3 +132,5 @@ dmypy.json
 .pyre/
 
 *.wasm
+
+check_validators/data/*.json

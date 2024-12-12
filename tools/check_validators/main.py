@@ -7,7 +7,7 @@ from rpc_provider import JsonProvider, JsonProviderError
 def check_history_validators(conn: JsonProvider, epoch_height: int, block_height: int):
     print("fetching epoch %d validators at block height %d" % (epoch_height, block_height))
     ret = None
-    ret = conn.get_validators_at_height(block_height)
+    ret = conn.get_validators_at_block_height(block_height)
     with open("data/validators_%d.json" % epoch_height, mode='w', encoding="utf-8") as f:
         json.dump(ret["current_validators"], f, indent=2)
     print()

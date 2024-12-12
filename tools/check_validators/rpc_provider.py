@@ -43,6 +43,9 @@ class JsonProvider(object):
 
     def get_validators_at_height(self, height: int):
         return self.json_rpc('validators', [height])
+    
+    def get_validators_at_block_height(self, height: int):
+        return self.json_rpc('validators', {"block_id": height})
 
     def get_block(self, block_id):
         return self.json_rpc('block', [block_id])
@@ -73,4 +76,15 @@ if __name__ == '__main__':
         print("Error: ", e)
     print()
     
+    time.sleep(3.0)
+
+    try:
+        conn = JsonProvider(rpc_url)
+        ret = conn.get_validators_at_block_height(134495510)
+        print(ret)
+    except JsonProviderError as e:
+        print("RPC Error: ", e)
+    except Exception as e:
+        print("Error: ", e)
+    print()
     
